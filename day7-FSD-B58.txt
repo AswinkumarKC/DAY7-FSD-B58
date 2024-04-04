@@ -1,0 +1,76 @@
+1)
+var request=new XMLHttpRequest();
+request.open('GET','https://restcountries.com/v3.1/all');
+request.onload=function (){
+    var countryData=JSON.parse(this.response);
+    const asia=countryData.filter((element)=>{
+        if(element.region==='Asia'){
+            return element.name;
+        }
+    });
+    console.log(asia);
+};
+request.send();
+
+2)
+var request=new XMLHttpRequest();
+request.open('GET','https://restcountries.com/v3.1/all');
+request.onload=function (){
+    var countryData=JSON.parse(this.response);
+    const asia=countryData.filter((element)=>{
+        if(element.population < 200000){
+            return element.name;
+        }
+    });
+    console.log(asia);
+};
+request.send();
+
+3)
+var request=new XMLHttpRequest();
+request.open('GET','https://restcountries.com/v3.1/all');
+request.onload=function (){
+    var countryData=JSON.parse(this.response);
+    countryData.forEach(element => {
+        console.log(element.name,element.capital,element.flag);
+        }
+    )};
+    
+request.send();
+
+4)
+var request=new XMLHttpRequest();
+request.open('GET','https://restcountries.com/v3.1/all');
+request.onload=function (){
+    var countryData=JSON.parse(this.response);
+    const population=countryData.reduce((acc,element)=>{
+        return acc+element.population;
+    },0)
+    console.log(population);};
+    
+request.send();
+
+5)
+var xhr = new XMLHttpRequest();
+        xhr.open("GET","https://restcountries.com/v3.1/all");
+        xhr.onload=function(){
+            if(xhr.status ===200){
+                //console.log(xhr.responseText);
+                var data=JSON.parse(xhr.responseText);
+                for(var i=0; i<data.length;i++){
+                    if (data[i].currencies != undefined) {
+                        Object.keys(data[i].currencies).forEach((key)=>{
+                            if(key == "USD"){
+                                console.log(key, data[i].currencies[key]);
+                            }
+                        });
+                    }
+                    
+                }
+        
+            }else{
+                console.log("Request failed", xhr.status)
+            }
+          
+        };
+        xhr.send();
